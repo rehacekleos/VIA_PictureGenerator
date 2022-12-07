@@ -22,6 +22,13 @@ Backend je založený na NodeJS s využitím ExpressJS
 Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 
 ## Progress
+### 8.12.2022
+- Vytvoření základních komponent na frontendu
+  - Registrace
+  - Login
+  - Hlavní stránka
+- Příprava modelů entit
+
 ### 23.11.2022
 - Vytvoření základní struktury projektu
 - Založení databázového serveru

@@ -1,0 +1,102 @@
+<div class="container">
+<div class="row vh-100 align-items-center justify-content-center">
+  <div class="col-12 col-lg-6 align-items-center justify-content-center">
+    <div class="w-fit-content mx-auto">
+        <h3>
+          You don't have already account?
+        </h3>
+        <p>Just simple <span class="fw-bold">Sign Up</span>!</p>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6 align-items-center justify-content-center">
+    <div class="card bg-light shadow mx-auto">
+      <form #registerForm="ngForm"
+            [appPasswordMatch]="['password', 'repassword']"
+            (ngSubmit)="register()"
+            class="p-3 px-5 w-100">
+        <div [class.mb-25px]="!(nickname.invalid && (nickname.dirty || nickname.touched))">
+          <label for="nickname" class="form-label">Nickname</label>
+          <input type="text"
+                 class="form-control"
+                 name="nickname"
+                 required
+                 minlength="4"
+                 #nickname="ngModel"
+                 [class.is-invalid]="nickname.invalid  && (nickname.dirty || nickname.touched)"
+                 [class.is-valid]="nickname.valid && (nickname.dirty || nickname.touched)"
+                 [(ngModel)]="registerAuth.nickname"
+                 id="nickname">
+          <div *ngIf="nickname.errors && (nickname.dirty || nickname.touched)" class="invalid-feedback">
+            <div *ngIf="nickname.errors['required']">Nickname is required</div>
+            <div *ngIf="nickname.errors['minlength']">
+              Nickname must be at least 4 characters
+            </div>
+          </div>
+        </div>
+        <div [class.mb-25px]="!(email.invalid && (email.dirty || email.touched))">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email"
+                 class="form-control"
+                 name="email"
+                 required
+                 email
+                 #email="ngModel"
+                 [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+                 [class.is-valid]="email.valid && (email.dirty || email.touched)"
+                 [(ngModel)]="registerAuth.email"
+                 id="email">
+          <div *ngIf="email.errors && (email.dirty || email.touched)" class="invalid-feedback">
+            <div *ngIf="email.errors['required']">Email is required</div>
+            <div *ngIf="email.errors['email']">Email is invalid</div>
+          </div>
+        </div>
+        <div [class.mb-25px]="!(password.invalid && (password.dirty || password.touched))">
+          <label for="password" class="form-label">Password</label>
+          <input type="password"
+                 class="form-control"
+                 name="password"
+                 required
+                 minlength="6"
+                 #password="ngModel"
+                 [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
+                 [class.is-valid]="password.valid && (password.dirty || password.touched)"
+                 [(ngModel)]="registerAuth.password"
+                 id="password">
+          <div *ngIf="password.errors && (password.dirty || password.touched)" class="invalid-feedback">
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+              Password must be at least 4 characters
+            </div>
+          </div>
+        </div>
+        <div [class.mb-25px]="!(repassword.invalid && (repassword.dirty || repassword.touched))">
+          <label for="repassword" class="form-label">Confirm Password</label>
+          <input type="password"
+                 class="form-control"
+                 name="repassword"
+                 required
+                 #repassword="ngModel"
+                 [class.is-invalid]="repassword.invalid && (repassword.dirty || repassword.touched)"
+                 [class.is-valid]="repassword.valid && (repassword.dirty || repassword.touched)"
+                 [(ngModel)]="rePassword"
+                 id="repassword" >
+          <div *ngIf="repassword.errors" class="invalid-feedback">
+            <div *ngIf="repassword.errors['required']">
+              Confirm Password is required
+            </div>
+            <div *ngIf="repassword.errors['matching']">
+              Confirm Password does not match
+            </div>
+          </div>
+        </div>
+        <div class="w-100 text-center pt-2">
+          <button type="submit"
+                  [disabled]="!registerForm.form.valid || rePassword !== registerAuth.password"
+                  class="btn btn-primary">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

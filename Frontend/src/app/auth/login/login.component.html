@@ -1,0 +1,45 @@
+<form #loginForm="ngForm"
+      (ngSubmit)="login()"
+      class="px-4 py-3">
+  <div [class.mb-25px]="!(email.invalid && (email.dirty || email.touched))">
+    <label for="email">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      email
+      required
+      name="email"
+      #email="ngModel"
+      [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+      [class.is-valid]="email.valid && (email.dirty || email.touched)"
+      [(ngModel)]="loginAuth.email"
+      autocomplete="username"
+    />
+    <div *ngIf="email.errors && (email.dirty || email.touched)" class="invalid-feedback">
+      <div *ngIf="email.errors['required']">Email is required</div>
+      <div *ngIf="email.errors['email']">Email is invalid</div>
+    </div>
+  </div>
+  <div [class.mb-25px]="!(password.invalid && (password.dirty || password.touched))">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      required
+      name="password"
+      #password="ngModel"
+      [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
+      [class.is-valid]="password.valid && (password.dirty || password.touched)"
+      [(ngModel)]="loginAuth.password"
+      id="password"
+      autocomplete="current-password"
+    />
+    <div *ngIf="password.errors && (password.dirty || password.touched)" class="invalid-feedback">
+      <div *ngIf="password.errors['required']">Password is required</div>
+    </div>
+  </div>
+  <div class="w-100 text-center">
+    <button type="submit" [disabled]="loginForm.form.invalid" class="btn btn-primary">Sign in</button>
+  </div>
+</form>

@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+
+$blue: #0065BD;
+
 @import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+
+.mb-25px{
+  margin-bottom: 25px !important;
+}
+
+.w-fit-content{
+  width: fit-content !important;
+}
