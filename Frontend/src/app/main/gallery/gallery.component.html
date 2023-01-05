@@ -1,0 +1,43 @@
+<div class="mt-5 container text-center">
+  <ng-container *ngIf="isMyGallery else Gallery">
+  <H1 class="pt-2">My Images</H1>
+  <div *ngIf="images else Loading">
+    <div class="row">
+      <div class="col p-2 flex-grow-0 text-start"
+           style="max-width: 216px;"
+           *ngFor="let item of images; let i=index">
+        <img [src]="item.image" class="pointer" height="200" width="200" (click)="openLightBox(i)">
+        <span class="fw-bold text-wrap text-break">{{item.name}}</span>
+        <br>
+        <i class="bi bi-calendar"></i> {{item.createdIn | date:"shortDate"}}
+      </div>
+    </div>
+  </div>
+  </ng-container>
+  <ng-template #Gallery>
+    <H1 class="pt-2">Gallery</H1>
+    <div *ngIf="images else Loading">
+      <div class="row">
+        <div class="col p-2 flex-grow-0"
+             *ngFor="let item of images; let i=index">
+          <img [src]="item.image" class="pointer" height="200" width="200" (click)="openLightBox(i)">
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+
+<ng-template #Loading>
+  <div class="row">
+    <div class="col p-2 flex-grow-0" *ngFor="let i of fakeArray">
+      <div class="ph-item p-0"
+      style="width: 200px; height: 200px">
+        <div class="ph-col-12 p-0">
+          <div class="ph-picture"
+               style="width: 200px; height: 200px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

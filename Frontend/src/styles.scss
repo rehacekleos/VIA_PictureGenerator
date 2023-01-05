@@ -8,6 +8,8 @@ $blue: #0065BD;
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import 'ngx-toastr/toastr';
 @import 'src/assets/toastr-bs5-alert.scss';
+@import 'ngx-lightbox/lightbox.css';
+@import "placeholder-loading/src/scss/placeholder-loading";
 
 html, body{
   margin: 0;

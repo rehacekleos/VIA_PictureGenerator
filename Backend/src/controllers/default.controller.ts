@@ -8,7 +8,6 @@ export class DefaultController implements BaseController {
 
     public router = express.Router();
     path = '/';
-    private readonly config = ConfigFactory.getConfig();
 
     constructor() {
         this.initRouter();
@@ -20,7 +19,7 @@ export class DefaultController implements BaseController {
     }
 
     indexHandler: RequestHandler = async (req, res) => {
-        res.status(200).send('Picture Generator Server is running on version: '+ this.config.version);
+        res.status(200).send('Picture Generator Server is running on version: '+ ConfigFactory.getConfig().version);
     };
 
     getHealthCheck: RequestHandler = async (req, res) => {
@@ -28,6 +27,6 @@ export class DefaultController implements BaseController {
             res.status(500).send('Database is not connected');
             return;
         }
-        res.status(200).send('Audit server is running on version: '+ this.config.version);
+        res.status(200).send('Audit server is running on version: '+ ConfigFactory.getConfig().version);
     };
 }

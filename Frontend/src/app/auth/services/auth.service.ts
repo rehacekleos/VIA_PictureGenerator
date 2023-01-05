@@ -10,39 +10,61 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AuthService {
 
-  $user: BehaviorSubject<User> = new BehaviorSubject<User>({
-    userId: '1',
-    nickname: 'rehacleo',
-    email: 'rehacleo@fel.cvut.cz',
-    password: 'test',
-    picture: ''
-  });
-  user: User;
+  $user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private user: User;
 
-  constructor(private http: HttpClient) {
+  private token: string;
+
+  constructor(private http: HttpClient, private router: Router) {
     this.$user.subscribe(user => {
       this.user = user;
     })
+    this.getTokenFromStorage();
   }
 
   async logIn(login: LoginAuth){
     const url = environment.authApi + "/login";
-    const user = await firstValueFrom(this.http.post<User>(url, login));
-    this.$user.next(user);
+    const token = await firstValueFrom(this.http.post<{token: string}>(url, login));
+    this.setToken(token.token);
   }
 
   async register(register: RegisterAuth){
     const url = environment.authApi + "/register";
-    const user = await firstValueFrom(this.http.post<User>(url, register));
-    this.$user.next(user);
-  }
-
-  async changePassword(userId: string, newPassword: string){
-    const url = environment.authApi + "/password";
+    const token = await firstValueFrom(this.http.post<{token: string}>(url, register));
+    this.setToken(token.token);
   }
 
   logOut(){
     this.$user.next(null);
+    sessionStorage.clear();
+    this.router.navigate(['']).then()
+  }
+
+  private setToken(token: string){
+    this.token = token;
+    sessionStorage.setItem('jwtToken', token);
+    this.setUser(token);
+  }
+
+  getTokenFromStorage(){
+    const token = sessionStorage.getItem('jwtToken');
+    if (token){
+      this.token = token;
+      this.setUser(token);
+    }
+  }
+
+  private setUser(token: string){
+    const user = JSON.parse(atob(token.split('.')[1]))
+    this.$user.next(user);
+  }
+
+  getToken(){
+    return this.token
+  }
+
+  getUser(){
+    return this.user;
   }
 
 }

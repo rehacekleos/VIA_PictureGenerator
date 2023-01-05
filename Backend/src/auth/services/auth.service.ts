@@ -2,6 +2,8 @@ import {UsersDa} from '../../users/dataAccess/users.da';
 import {LoginAuth, RegisterAuth} from '../models/auth.model';
 import {User} from '../../users/models/user.model';
 import { v4 as uuid } from 'uuid';
+import {ConfigFactory} from '../../factories/configFactory';
+const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
 
@@ -44,6 +46,10 @@ export class AuthService {
         } else {
             throw Error("Cannot register user. Please try again!");
         }
+    }
+
+    createToken(user: User){
+        return jwt.sign(user, ConfigFactory.getConfig().jwtSecret, {expiresIn: 10*60});
     }
 
 }

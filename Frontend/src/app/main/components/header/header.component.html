@@ -3,16 +3,24 @@
         <a class="navbar-brand text-white text-uppercase">Picture generator</a>
         <ul class="navbar-nav mx-auto mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link link-light"><i class="bi bi-house-fill me-1"></i>Home</a>
+            <a class="nav-link link-light"
+              [routerLink]="['']"
+            ><i class="bi bi-house-fill me-1"></i>Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link link-light"><i class="bi bi-images me-1"></i>Gallery</a>
+            <a class="nav-link link-light"
+               [routerLink]="['gallery']"
+            ><i class="bi bi-images me-1"></i>Gallery</a>
           </li>
           <li class="nav-item" *ngIf="user">
-            <a class="nav-link link-light"><i class="bi bi-person-square me-1"></i>My images</a>
+            <a class="nav-link link-light"
+               [routerLink]="['my-gallery']"
+            ><i class="bi bi-person-square me-1"></i>My images</a>
           </li>
           <li class="nav-item" *ngIf="user">
-            <a class="nav-link link-light"><i class="bi bi-palette-fill me-1"></i>Create</a>
+            <a class="nav-link link-light"
+              [routerLink]="['generate']"
+            ><i class="bi bi-palette-fill me-1"></i>Create</a>
           </li>
         </ul>
 

@@ -9,6 +9,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthModule} from '../auth/auth.module';
 import {FormsModule} from '@angular/forms';
+import { GalleryComponent } from './gallery/gallery.component';
+import {LightboxModule} from 'ng-gallery/lightbox';
+import { GenerateImageComponent } from './generate-image/generate-image.component';
 
 
 
@@ -18,14 +21,17 @@ import {FormsModule} from '@angular/forms';
     DashboardComponent,
     HeaderComponent,
     ProfileComponent,
-    FooterComponent
+    FooterComponent,
+    GalleryComponent,
+    GenerateImageComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
     NgbModule,
     AuthModule,
-    FormsModule
+    FormsModule,
+    LightboxModule
   ]
 })
 export class MainModule { }

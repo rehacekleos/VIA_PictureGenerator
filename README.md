@@ -38,3 +38,12 @@ Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 - Základní endpointy
 - Zabezpečení aplikace
   - Jiné rozhraní pro přihlášeného a odhlášeného uživatele
+
+## 5.1.2022
+- Napojení na Dall-E 2
+- Vytvoření obrazovky galerie
+- Vytvoření obrazovky moje obrázky
+- Vytvoření jednoduchého generátoru
+- Zabezpečení endpointů pomocí jwt
+
+Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximální počet obrázků. při velkém množství přestane aplikace generovat nové obrázky.

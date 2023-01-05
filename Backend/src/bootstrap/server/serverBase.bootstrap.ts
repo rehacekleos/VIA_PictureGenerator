@@ -9,6 +9,10 @@ import {DefaultController} from "../../controllers/default.controller";
 import {AuthController} from '../../auth/controllers/auth.controller';
 import {UsersDa} from '../../users/dataAccess/users.da';
 import {AuthService} from '../../auth/services/auth.service';
+import {DallEService} from '../../dataAccess/dallE/dallE.service';
+import {ImageService} from '../../image/services/image.service';
+import {ImageController} from '../../image/controllers/image.controller';
+import {ImageDa} from '../../image/dataAccess/image.da';
 
 export class ServerBaseBootstrap {
 
@@ -37,11 +41,15 @@ export class ServerBaseBootstrap {
         const port = process.env.PORT || 8080;
 
         const userDA = UsersDa.getInstance();
+        const imageDA = ImageDa.getInstance();
+        const dallE = new DallEService();
+        const imageService = new ImageService(dallE, imageDA);
         const authService = new AuthService(userDA);
 
         this.server = new Server(Number.parseInt(port.toString()), [
                 new DefaultController(),
-                new AuthController(authService)
+                new AuthController(authService),
+                new ImageController(imageService)
             ]
         );
 

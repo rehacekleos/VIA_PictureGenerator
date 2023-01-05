@@ -6,7 +6,6 @@ import {logger} from "../../logger/logger";
 export class MongoDB {
     private static instance: MongoDB
     private readonly mongoClient: Promise<MongoClient>
-    private readonly config = ConfigFactory.getConfig();
     public static isConnected = false;
 
     /***
@@ -14,8 +13,8 @@ export class MongoDB {
      * @param isMaster true if current thread is master from cluster
      */
     constructor(isMaster?: boolean) {
-        logger.info('Creating Mongo client', this.config.mongoDbUri);
-        this.mongoClient = MongoClient.connect(encodeURI(this.config.mongoDbUri)).then( async (res) => {
+        logger.info('Creating Mongo client', ConfigFactory.getConfig().mongoDbUri);
+        this.mongoClient = MongoClient.connect(encodeURI(ConfigFactory.getConfig().mongoDbUri)).then( async (res) => {
                 logger.info('Mongo client connected!');
                 MongoDB.isConnected = true;
                 return res;

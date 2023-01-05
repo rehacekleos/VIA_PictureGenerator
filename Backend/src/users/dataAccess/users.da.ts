@@ -1,6 +1,7 @@
 import {BaseDataAccess} from '../../dataAccess/Base.dataAccess';
 import {DataAccessInterface} from '../../dataAccess/dataAccess.interface';
 import {User} from '../models/user.model';
+import {ConfigFactory} from '../../factories/configFactory';
 
 export class UsersDa extends BaseDataAccess implements DataAccessInterface{
     collection: string;
@@ -15,7 +16,7 @@ export class UsersDa extends BaseDataAccess implements DataAccessInterface{
 
     constructor() {
         super();
-        this.collection = BaseDataAccess.config.usersCollection;
+        this.collection = ConfigFactory.getConfig().usersCollection;
     }
 
     async getUserByEmail(email: string): Promise<User>{

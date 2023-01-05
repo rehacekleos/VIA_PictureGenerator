@@ -1,0 +1,13 @@
+<div class="container mt-5 text-center">
+  <h1 class="pt-2">Generate new image</h1>
+  <form>
+    Prompt:
+    <input name="prompt" type="text" [(ngModel)]="prompt">
+    <button (click)="generate()">Create</button>
+  </form>
+
+  <div *ngIf="image">
+  <h2>Result</h2>
+    <img [src]="image.image">
+  </div>
+</div>

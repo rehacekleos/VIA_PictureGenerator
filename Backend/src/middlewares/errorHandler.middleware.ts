@@ -15,8 +15,7 @@ export function errorHandlerMiddleware(error: any, request: express.Request, res
         if(status !== 401) {
             logger.warn(error);
         }
-
-        response.status(status).json(payload).send();
+        response.status(status).json(payload);
     } else {
         let payload = {
             error: {
@@ -24,8 +23,6 @@ export function errorHandlerMiddleware(error: any, request: express.Request, res
             }
         }
 
-        logger.warn(error);
-        response.status(500).json(payload).send();
+        response.status(500).json(payload);
     }
-
 }
