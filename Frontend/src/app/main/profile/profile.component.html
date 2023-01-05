@@ -1,1 +1,101 @@
-<p>profile works!</p>
+<div class="container vh-100" *ngIf="user">
+  <div class="d-flex justify-content-center align-items-center h-100">
+    <div class="col col-lg-10 mb-4 mb-lg-0">
+      <div class="card mb-3 shadow">
+        <form ngForm #editForm="ngForm" (ngSubmit)="confirmEdit()" class="row g-0" >
+          <div class="col-md-4 gradient-custom text-center px-2"
+               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+            <div (click)="setPicture()" [class.pointer]="edit">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                   [class.edit-profile-image]="edit"
+                   alt="Avatar" class="img-fluid my-4" style="width: 80px;">
+              <i *ngIf="edit" class="bi bi-pencil-square edit-profile-image-icon"></i>
+            </div>
+            <div>
+              <h5 *ngIf="!edit">{{user.nickname}}</h5>
+              <div *ngIf="edit">
+                <label for="nickname" class="form-label">Nickname</label>
+                <input type="text"
+                       class="form-control"
+                       name="nickname"
+                       required
+                       minlength="4"
+                       #nickname="ngModel"
+                       [class.is-invalid]="nickname.invalid  && (nickname.dirty || nickname.touched)"
+                       [class.is-valid]="nickname.valid && (nickname.dirty || nickname.touched)"
+                       [(ngModel)]="user.nickname"
+                       id="nickname">
+              </div>
+            </div>
+            <div *ngIf="edit">
+              <div>
+                <label for="password" class="form-label">Password</label>
+                <input type="password"
+                       class="form-control"
+                       name="password"
+                       minlength="6"
+                       #password="ngModel"
+                       [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
+                       [class.is-valid]="password.valid && (password.dirty || password.touched)"
+                       [(ngModel)]="user.password"
+                       id="password">
+                <div *ngIf="password.errors && (password.dirty || password.touched)" class="invalid-feedback">
+                  <div *ngIf="password.errors['minlength']">
+                    Password must be at least 4 characters
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="repassword" class="form-label">Confirm Password</label>
+                <input type="password"
+                       class="form-control"
+                       name="repassword"
+                       #repassword="ngModel"
+                       [class.is-invalid]="repassword.invalid && (repassword.dirty || repassword.touched)"
+                       [class.is-valid]="repassword.valid && (repassword.dirty || repassword.touched)"
+                       [(ngModel)]="rePassword"
+                       id="repassword" >
+                <div *ngIf="repassword.errors" class="invalid-feedback">
+                  <div *ngIf="repassword.errors['matching']">
+                    Confirm Password does not match
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4 pointer" *ngIf="!edit" (click)="editProfile()">
+              <i class="bi bi-pencil-square"></i> Edit
+            </div>
+            <div class="mt-2 mb-2" *ngIf="edit">
+              <button (click)="cancelEdit()" class="btn btn-danger mx-1">Cancel</button>
+              <button type="submit" [disabled]="editForm.form.invalid" class="btn btn-primary mx-1">Edit</button>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body p-4">
+              <h6>Information</h6>
+              <hr class="mt-0 mb-4">
+              <div class="row pt-1">
+                <div class="col-12 mb-3">
+                  <h6>Email</h6>
+                  <p class="text-muted">{{user.email}}</p>
+                </div>
+              </div>
+              <h6>Statistics</h6>
+              <hr class="mt-0 mb-4">
+              <div class="row pt-1">
+                <div class="col-6 mb-3">
+                  <h6>Images</h6>
+                  <p class="text-muted">Lorem ipsum</p>
+                </div>
+                <div class="col-6 mb-3">
+                  <h6>Rating</h6>
+                  <p class="text-muted">Dolor sit amet</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

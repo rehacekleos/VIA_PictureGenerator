@@ -5,14 +5,18 @@ export let config = function () {
 
 let configuration = {
     production : {
-        mongoDbUri: 'mongodb+srv://MongoUser: GN17WVoBWWHXwPOx@picturegenerator.ioyr9u0.mongodb.net/?retryWrites=true&w=majority',
+        mongoDbUri: 'mongodb+srv://MongoUser:GN17WVoBWWHXwPOx@picturegenerator.ioyr9u0.mongodb.net/?retryWrites=true&w=majority',
         mongoDatabase: 'PictureGenerator',
+
+        usersCollection: 'users',
 
         version: '0.0.1'
     },
     localhost: {
-        mongoDbUri: 'mongodb+srv://MongoUser: GN17WVoBWWHXwPOx@picturegenerator.ioyr9u0.mongodb.net/?retryWrites=true&w=majority',
+        mongoDbUri: 'mongodb+srv://MongoUser:GN17WVoBWWHXwPOx@picturegenerator.ioyr9u0.mongodb.net/?retryWrites=true&w=majority',
         mongoDatabase: 'PictureGenerator',
+
+        usersCollection: 'users',
 
         version: '0.0.1'
     },

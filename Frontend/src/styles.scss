@@ -4,14 +4,19 @@
 
 $blue: #0065BD;
 
-@import '~bootstrap/scss/bootstrap';
-@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import 'bootstrap/scss/bootstrap';
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import 'ngx-toastr/toastr';
+@import 'src/assets/toastr-bs5-alert.scss';
 
 html, body{
   margin: 0;
   padding: 0;
 }
 
+.toast-top-center{
+  margin-top: 40px !important;
+}
 
 .mb-25px{
   margin-bottom: 25px !important;
@@ -19,4 +24,8 @@ html, body{
 
 .w-fit-content{
   width: fit-content !important;
+}
+
+.pointer{
+  cursor: pointer !important;
 }

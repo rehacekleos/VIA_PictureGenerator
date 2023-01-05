@@ -9,9 +9,7 @@ export function errorHandlerMiddleware(error: any, request: express.Request, res
         const status = error?.status;
 
         let payload = {
-            error: {
-                message: message
-            }
+            message: message
         }
 
         if(status !== 401) {

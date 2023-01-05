@@ -32,3 +32,9 @@ Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 ### 23.11.2022
 - Vytvoření základní struktury projektu
 - Založení databázového serveru
+
+## 16.12.2022
+- Login a Registrace napojena na DB
+- Základní endpointy
+- Zabezpečení aplikace
+  - Jiné rozhraní pro přihlášeného a odhlášeného uživatele

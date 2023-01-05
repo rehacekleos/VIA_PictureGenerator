@@ -6,6 +6,7 @@
           You don't have already account?
         </h3>
         <p>Just simple <span class="fw-bold">Sign Up</span>!</p>
+        <p>Already have account? <a routerLink="" class="fw-bold">Log in</a></p>
     </div>
   </div>
 
@@ -13,7 +14,7 @@
     <div class="card bg-light shadow mx-auto">
       <form #registerForm="ngForm"
             [appPasswordMatch]="['password', 'repassword']"
-            (ngSubmit)="register()"
+            (ngSubmit)="register(registerForm)"
             class="p-3 px-5 w-100">
         <div [class.mb-25px]="!(nickname.invalid && (nickname.dirty || nickname.touched))">
           <label for="nickname" class="form-label">Nickname</label>
@@ -92,7 +93,7 @@
         </div>
         <div class="w-100 text-center pt-2">
           <button type="submit"
-                  [disabled]="!registerForm.form.valid || rePassword !== registerAuth.password"
+                  [disabled]="!registerForm.form.valid || rePassword !== registerAuth.password || registering"
                   class="btn btn-primary">Sign Up</button>
         </div>
       </form>

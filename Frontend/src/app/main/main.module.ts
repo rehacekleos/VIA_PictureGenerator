@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthModule} from '../auth/auth.module';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -23,7 +24,8 @@ import {AuthModule} from '../auth/auth.module';
     CommonModule,
     MainRoutingModule,
     NgbModule,
-    AuthModule
+    AuthModule,
+    FormsModule
   ]
 })
 export class MainModule { }

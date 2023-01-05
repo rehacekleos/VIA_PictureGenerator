@@ -8,21 +8,21 @@
           <li class="nav-item">
             <a class="nav-link link-light"><i class="bi bi-images me-1"></i>Gallery</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link link-light"><i class="bi bi-person-square me-1"></i>My images</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="user">
             <a class="nav-link link-light"><i class="bi bi-palette-fill me-1"></i>Create</a>
           </li>
         </ul>
 
         <div ngbDropdown display="dynamic">
-          <div ngbDropdownToggle>
-            <span>rehacleo</span>
-            <i class="bi bi-person-fill"></i>
+          <div ngbDropdownToggle class="pointer">
+            <span *ngIf="user">{{user.nickname}}</span>
+            <i class="ms-1 bi bi-person-fill"></i>
           </div>
           <div ngbDropdownMenu class="bg-light shadow">
-            <div>
+            <div *ngIf="!user">
               <app-login></app-login>
               <div class="dropdown-divider mt-1"></div>
               <button type="button"
@@ -31,10 +31,16 @@
                 <span class="fw-bold">Sign up</span>
               </button>
             </div>
-            <div class="text-center">
+            <div *ngIf="user" class="text-center">
               <button type="button"
+                      routerLink="profile"
                       ngbDropdownItem>
-                <span class="fw-bold">Log Out</span>
+                <span class="fw-bold"><i class="bi bi-person-fill"></i> Profile</span>
+              </button>
+              <button type="button"
+                      (click)="logOut()"
+                      ngbDropdownItem>
+                <span class="fw-bold"><i class="bi bi-box-arrow-right"></i> Log Out</span>
               </button>
             </div>
           </div>

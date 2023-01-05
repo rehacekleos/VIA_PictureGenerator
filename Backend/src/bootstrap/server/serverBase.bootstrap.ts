@@ -6,6 +6,9 @@ import {IServerInstances} from "../../interfaces/IServerInstances";
 import {Server} from "../../server/server";
 import express from 'express';
 import {DefaultController} from "../../controllers/default.controller";
+import {AuthController} from '../../auth/controllers/auth.controller';
+import {UsersDa} from '../../users/dataAccess/users.da';
+import {AuthService} from '../../auth/services/auth.service';
 
 export class ServerBaseBootstrap {
 
@@ -33,8 +36,12 @@ export class ServerBaseBootstrap {
     protected initServer(): express.Application {
         const port = process.env.PORT || 8080;
 
+        const userDA = UsersDa.getInstance();
+        const authService = new AuthService(userDA);
+
         this.server = new Server(Number.parseInt(port.toString()), [
-                new DefaultController()
+                new DefaultController(),
+                new AuthController(authService)
             ]
         );
 
