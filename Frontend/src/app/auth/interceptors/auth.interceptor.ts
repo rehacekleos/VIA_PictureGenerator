@@ -3,9 +3,9 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor, HttpErrorResponse
+  HttpInterceptor, HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
-import {catchError, Observable, retry, throwError} from 'rxjs';
+import {catchError, map, Observable, retry, tap, throwError} from 'rxjs';
 import {AuthService} from '../services/auth.service';
 import {CustomToasterService} from '../../utils/custom-toaster.service';
 
@@ -22,6 +22,14 @@ export class AuthInterceptor implements HttpInterceptor {
     });
     return next.handle(modifiedReq).pipe(
       retry(0),
+      tap((httpEvent: HttpEvent<any>) => {
+        if (httpEvent instanceof HttpResponse) {
+          if(httpEvent.headers.has('x-new-token')) {
+            const newToken = httpEvent.headers.get('x-new-token');
+            this.authService.setToken(newToken, false);
+          }
+        }
+      }),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           this.toaster.showToastMessage('You have been inactive for a long time, please login again.', 5000, 'danger');

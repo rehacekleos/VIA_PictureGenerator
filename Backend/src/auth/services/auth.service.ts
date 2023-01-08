@@ -40,7 +40,7 @@ export class AuthService {
         }
     }
 
-    createToken(user: User){
+    static createToken(user: User){
         return jwt.sign(user, ConfigFactory.getConfig().jwtSecret, {expiresIn: 10*60});
     }
 

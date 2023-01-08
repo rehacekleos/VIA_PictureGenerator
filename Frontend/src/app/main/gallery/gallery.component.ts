@@ -4,6 +4,7 @@ import {Lightbox} from 'ngx-lightbox';
 import {ActivatedRoute} from '@angular/router';
 import {Image} from '../models/image.model';
 import {AuthService} from '../../auth/services/auth.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-gallery',
@@ -18,10 +19,12 @@ export class GalleryComponent implements OnInit {
   fakeArray = new Array(16);
   images: Image[] = null;
   private _album: any[] = [];
+  deletedImageName: any;
 
   constructor(private imageService: ImageService,
               private authService: AuthService,
               private route: ActivatedRoute,
+              private modalService: NgbModal,
               private _lightbox: Lightbox) { }
 
   ngOnInit(): void {
@@ -33,6 +36,10 @@ export class GalleryComponent implements OnInit {
     const path = this.route.snapshot.routeConfig.path
     this.isMyGallery = path == 'my-gallery';
 
+    this.getImages();
+  }
+
+  getImages(){
     this.imageService.getImages(this.isMyGallery).then(images => {
       this.images = images
       this._album = images.map(image => {
@@ -60,5 +67,17 @@ export class GalleryComponent implements OnInit {
     item.rating.push($event);
     this.getRating(item);
     this.canRate = this.authService.getUser() !== null;
+  }
+
+  deleteImage(item: Image, content: any) {
+    this.deletedImageName = item.name;
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      async (result) => {
+        await this.imageService.deleteImage(item.imageId);
+        this.getImages();
+      },
+      (reason) => {
+      },
+    );
   }
 }

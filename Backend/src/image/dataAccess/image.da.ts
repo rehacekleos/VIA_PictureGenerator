@@ -63,4 +63,11 @@ export class ImageDa extends BaseDataAccess implements DataAccessInterface{
         const result = await this.db.collection(this.collection).countDocuments(query);
         return result
     }
+
+    async deleteImage(imageId: string) {
+        const query = {
+            imageId: imageId
+        }
+        await this.db.collection(this.collection).deleteOne(query);
+    }
 }

@@ -76,4 +76,12 @@ export class ImageService{
     async getImageCount(userId: string) {
         return await this.imageDa.getCount(userId);
     }
+
+    async deleteImage(imageId: string, user: User) {
+        const image = await this.imageDa.getImage(imageId);
+        if (image.userId !== user.userId){
+            throw new Error('You can not delete this image');
+        }
+        await this.imageDa.deleteImage(imageId);
+    }
 }

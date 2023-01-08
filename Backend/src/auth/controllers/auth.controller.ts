@@ -23,7 +23,7 @@ export class AuthController implements BaseController{
         const auth: LoginAuth = req.body;
         try{
             const user = await this.authService.loginUser(auth);
-            const token = this.authService.createToken(user);
+            const token = AuthService.createToken(user);
             res.status(200).send({token});
         } catch (e) {
             next(new HttpException(400, e.message));
@@ -34,7 +34,7 @@ export class AuthController implements BaseController{
         const register: RegisterAuth = req.body;
         try{
             const user = await this.authService.registerUser(register);
-            const token = this.authService.createToken(user);
+            const token = AuthService.createToken(user);
             res.status(200).send({token});
         } catch (e) {
             next(new HttpException(400, e.message));

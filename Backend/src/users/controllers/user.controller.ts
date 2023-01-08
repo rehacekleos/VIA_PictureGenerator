@@ -23,6 +23,7 @@ export class UserController implements BaseController{
         const user: User = req['user'];
         try{
             const updated = await this.userService.updateUser(user.userId, updatedUser);
+            req['user'] = updated;
             res.status(200).send(updated);
         } catch (e) {
             next(new HttpException(400, e.message));

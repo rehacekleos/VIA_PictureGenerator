@@ -25,13 +25,13 @@ export class AuthService {
   async logIn(login: LoginAuth){
     const url = environment.authApi + "/login";
     const token = await firstValueFrom(this.http.post<{token: string}>(url, login));
-    this.setToken(token.token);
+    this.setToken(token.token, true);
   }
 
   async register(register: RegisterAuth){
     const url = environment.authApi + "/register";
     const token = await firstValueFrom(this.http.post<{token: string}>(url, register));
-    this.setToken(token.token);
+    this.setToken(token.token, true);
   }
 
   logOut(){
@@ -40,10 +40,12 @@ export class AuthService {
     this.router.navigate(['']).then()
   }
 
-  private setToken(token: string){
+  setToken(token: string, setUser: boolean){
     this.token = token;
     sessionStorage.setItem('jwtToken', token);
-    this.setUser(token);
+    if (setUser) {
+      this.setUser(token);
+    }
   }
 
   getTokenFromStorage(){

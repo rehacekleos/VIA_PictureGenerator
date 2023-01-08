@@ -3,6 +3,8 @@ import * as express from "express";
 import {RequestHandler} from "express";
 import {ConfigFactory} from "../factories/configFactory";
 import {MongoDB} from "../dataAccess/DBConnection/MongoDB";
+import swaggerUi from 'swagger-ui-express';
+import {Swagger} from '../assets/swagger';
 
 export class DefaultController implements BaseController {
 
@@ -14,12 +16,14 @@ export class DefaultController implements BaseController {
     }
 
     initRouter(): void {
+        this.router.use('/api/docs', swaggerUi.serve);
+        this.router.get('/api/docs', swaggerUi.setup(Swagger));
         this.router.get('/', this.indexHandler);
         this.router.get('/health-check', this.getHealthCheck);
     }
 
     indexHandler: RequestHandler = async (req, res) => {
-        res.status(200).send('Picture Generator Server is running on version: '+ ConfigFactory.getConfig().version);
+        res.sendFile(process.cwd()+"/src/fe/");
     };
 
     getHealthCheck: RequestHandler = async (req, res) => {

@@ -55,3 +55,7 @@ Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximál
 - Dodělání úvodní stránky
 - Úprava generování fotek
 - Přídání hodnocení fotek
+- Přidání odstranění fotek
+- Obnovení jwt tokenu při každém zabezpečeném volání
+- Odhlášení uživatel po 10 minutách neaktivity
+- Přidání Swaggeru

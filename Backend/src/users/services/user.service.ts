@@ -11,6 +11,9 @@ export class UserService {
 
     async updateUser(userId: string, updatedUser: UpdateUser) {
         const user = await this.userDA.getUserById(userId);
+        if (!user){
+            throw new Error('User not found')!
+        }
         user.nickname = updatedUser.nickname;
         if (updatedUser.password !== ''){
             user.password = await bcrypt.hash(updatedUser.password, 10);

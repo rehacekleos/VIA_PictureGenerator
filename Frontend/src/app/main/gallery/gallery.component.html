@@ -1,4 +1,4 @@
-<div class="mt-5 container text-center">
+<div class="mt-5 pb-5 container text-center">
   <ng-container *ngIf="isMyGallery else Gallery">
   <H1 class="pt-2">My Images</H1>
   <div *ngIf="images else Loading">
@@ -7,9 +7,11 @@
            style="max-width: 216px;"
            *ngFor="let item of images; let i=index">
         <img [src]="item.image" class="pointer" height="200" width="200" (click)="openLightBox(i)">
-        <span class="fw-bold text-wrap text-break">{{item.name}}</span>
-        <br>
-        <i class="bi bi-calendar"></i> {{item.createdIn | date:"shortDate"}}
+        <div class="row text-start"><span class="fw-bold text-wrap text-break">{{item.name}}</span></div>
+        <div class="row text-start"><i class="bi bi-calendar w-auto"></i> {{item.createdIn | date:"shortDate"}}</div>
+        <div class="row text-start text-danger pointer"
+             (click)="deleteImage(item, content)"><i class="bi bi-trash w-auto"></i> Delete</div>
+
       </div>
     </div>
   </div>
@@ -45,5 +47,19 @@
         </div>
       </div>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete Image</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Do you really want to delete image with name: {{deletedImageName}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>

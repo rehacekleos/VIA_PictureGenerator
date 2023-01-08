@@ -30,7 +30,7 @@ export class ImageService {
   }
 
   async getMyImages() {
-    const url = environment.imageApi + '/'
+    const url = environment.imageApi
     const images = await firstValueFrom(this.http.get<any[]>(url));
     for (let image of images){
       image.image = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + image.image);
@@ -54,5 +54,10 @@ export class ImageService {
     const url = environment.imageApi + '/count'
     const response = await firstValueFrom(this.http.get<{ count: number }>(url));
     return response.count;
+  }
+
+  async deleteImage(imageId: string) {
+    const url = environment.imageApi + `/${imageId}`
+    await firstValueFrom(this.http.delete(url))
   }
 }

@@ -23,6 +23,7 @@ export class ImageController implements BaseController{
         this.router.get('/count',[AuthMiddleware], this.getImageCount);
         this.router.post('/generate', [AuthMiddleware], this.generateImage);
         this.router.post('/rating/:imageId', [AuthMiddleware], this.ratingImage);
+        this.router.delete('/:imageId', [AuthMiddleware], this.deleteImage);
 
     }
 
@@ -72,6 +73,17 @@ export class ImageController implements BaseController{
         const user = req['user'];
         try{
             await this.imageService.ratingImage(imageId, rating);
+            res.status(200).send();
+        } catch (e) {
+            next(new HttpException(400, e.message));
+        }
+    }
+
+    deleteImage: RequestHandler = async (req, res, next: express.NextFunction) => {
+        const imageId: string = req.params?.imageId;
+        const user = req['user'];
+        try{
+            await this.imageService.deleteImage(imageId, user);
             res.status(200).send();
         } catch (e) {
             next(new HttpException(400, e.message));
