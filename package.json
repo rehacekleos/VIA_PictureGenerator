@@ -2,7 +2,7 @@
   "name": "VIA-image-generator",
   "scripts": {
     "build-fe": "cd Frontend && npm run build ",
-    "build": "npm install && cd Backend && npm install && tsc && cd .. && cp -a /Backend/node_modules/. /node_modules/",
+    "build": "npm install && cd Backend && npm install && tsc && cd .. && cp -R /Backend/node_modules/* /node_modules",
     "start": "node build/index.js"
   },
   "devDependencies": {
