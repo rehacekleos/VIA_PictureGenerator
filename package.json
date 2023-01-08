@@ -1,7 +1,7 @@
 {
   "name": "VIA-image-generator",
   "scripts": {
-    "build": "npm install && cd Backend && tsc && cd .. &&  cd Frontend && npm run build ",
+    "build": "npm install && nmp install -g @angular/cli && cd Backend && tsc && cd .. &&  cd Frontend && npm run build ",
     "start": "node build/index.js"
   },
   "dependencies": {
