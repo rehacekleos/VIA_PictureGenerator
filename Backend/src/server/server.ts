@@ -33,6 +33,9 @@ export class Server {
         this.app.use(cors());
 
         this.initControllers(controllers);
+
+        this.app.use(express.static(process.cwd()+"/build/fe/"));
+
         this.app.use(errorHandlerMiddleware);
     }
 

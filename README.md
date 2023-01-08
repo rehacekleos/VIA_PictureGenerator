@@ -50,7 +50,7 @@ Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximál
 
 ## 8.1.2022
 - Dokončení profilu
-  - změna nickname a hesla
+  - Změna nickname a hesla
 - Přidání limitu na maximální počet obrázků
 - Dodělání úvodní stránky
 - Úprava generování fotek

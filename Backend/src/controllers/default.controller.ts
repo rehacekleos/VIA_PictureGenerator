@@ -23,7 +23,7 @@ export class DefaultController implements BaseController {
     }
 
     indexHandler: RequestHandler = async (req, res) => {
-        res.sendFile(process.cwd()+"/src/fe/");
+        res.sendFile(process.cwd()+"/build/fe/");
     };
 
     getHealthCheck: RequestHandler = async (req, res) => {

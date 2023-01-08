@@ -1,0 +1,10 @@
+{
+  "name": "VIA-image-generator",
+  "scripts": {
+    "build": "cd Backend && tsc && npm install && cd .. && cp -a Backend/node_modules/. node_modules && cd Frontend && npm run build ",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}
