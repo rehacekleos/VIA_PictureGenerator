@@ -11,7 +11,7 @@ let configuration = {
         usersCollection: 'users',
         imagesCollection: 'images',
 
-        dallE_API_KEY: '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',
+        dallE_API_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcGlLZXkiOiJzay1TamtNczBXZm51TFM0dk00eWxtZlQzQmxia0ZKbHNBNFNNR1dmU1l5N0d6Q1c4czAiLCJpYXQiOjE2NzMxODQ5MzF9.Y3MMXQBSB5pASVwVa-hFHs6tXngc8GQI1cJRtFZtyYM',
 
         jwtSecret: 'W17IR3Wz1dBkZVKZsditfWr3mbTzs96JZv6a7Q6ck9MYKcGfV4tBfrxeJGYPX6tf',
 

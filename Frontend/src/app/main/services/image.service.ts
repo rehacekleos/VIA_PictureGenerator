@@ -44,4 +44,15 @@ export class ImageService {
     image.image = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + image.image);
     return image;
   }
+
+  async addRating(imageId: string, rating: number) {
+    const url = environment.imageApi + `/rating/${imageId}`
+    await firstValueFrom(this.http.post(url, {rating: rating}))
+  }
+
+  async getImagesCount() {
+    const url = environment.imageApi + '/count'
+    const response = await firstValueFrom(this.http.get<{ count: number }>(url));
+    return response.count;
+  }
 }

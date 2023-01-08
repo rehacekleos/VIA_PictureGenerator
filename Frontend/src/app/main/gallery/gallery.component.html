@@ -2,7 +2,7 @@
   <ng-container *ngIf="isMyGallery else Gallery">
   <H1 class="pt-2">My Images</H1>
   <div *ngIf="images else Loading">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col p-2 flex-grow-0 text-start"
            style="max-width: 216px;"
            *ngFor="let item of images; let i=index">
@@ -17,10 +17,16 @@
   <ng-template #Gallery>
     <H1 class="pt-2">Gallery</H1>
     <div *ngIf="images else Loading">
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col p-2 flex-grow-0"
              *ngFor="let item of images; let i=index">
           <img [src]="item.image" class="pointer" height="200" width="200" (click)="openLightBox(i)">
+          <div class="row text-start"><span class="fw-bold text-wrap text-break">{{item.name}}</span></div>
+          <div class="row text-start"><i class="bi bi-person-fill w-auto"></i> {{item.author}}</div>
+          <ngb-rating [rate]="getRating(item)"
+                      [max]="5"
+                      [readonly]="!canRate"
+                      (rateChange)="setRating($event, item)"></ngb-rating>
         </div>
       </div>
     </div>
@@ -29,7 +35,7 @@
 
 
 <ng-template #Loading>
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col p-2 flex-grow-0" *ngFor="let i of fakeArray">
       <div class="ph-item p-0"
       style="width: 200px; height: 200px">

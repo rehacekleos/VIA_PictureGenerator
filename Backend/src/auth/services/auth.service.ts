@@ -1,19 +1,20 @@
 import {UsersDa} from '../../users/dataAccess/users.da';
 import {LoginAuth, RegisterAuth} from '../models/auth.model';
 import {User} from '../../users/models/user.model';
-import { v4 as uuid } from 'uuid';
+
 import {ConfigFactory} from '../../factories/configFactory';
+import {UserService} from '../../users/services/user.service';
 const jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
 
 export class AuthService {
 
-    constructor(private userDA: UsersDa) {
+    constructor(private userService: UserService) {
     }
 
     async loginUser(login: LoginAuth): Promise<User>{
-        const user = await this.userDA.getUserByEmail(login.email);
+        const user = await this.userService.getUserByEmail(login.email);
         if (user) {
             const isPasswordMatching = await bcrypt.compare(login.password, user.password);
             if (isPasswordMatching) {
@@ -27,20 +28,11 @@ export class AuthService {
     }
 
     async registerUser(register: RegisterAuth): Promise<User>{
-        const user = await this.userDA.getUserByEmail(register.email);
+        const user = await this.userService.getUserByEmail(register.email);
         if (user){
             throw Error("You cannot use this email!");
         }
-        const newUser: User = {
-            userId: uuid().toString(),
-            email: register.email,
-            password: await bcrypt.hash(register.password, 10),
-            nickname: register.nickname
-
-        }
-        register.password = await bcrypt.hash(register.password, 10);
-
-        const result = this.userDA.createUser(newUser);
+        const result = await this.userService.createUser(register)
         if (result){
             return result;
         } else {

@@ -1,7 +1,10 @@
 <nav class="navbar fixed-top bg-primary navbar-expand-sm">
-    <div class="container-fluid text- text-white">
-        <a class="navbar-brand text-white text-uppercase">Picture generator</a>
-        <ul class="navbar-nav mx-auto mb-lg-0">
+    <div class="container-fluid justify-content-between text-white">
+      <div class="col-3">
+        <a class="navbar-brand text-white text-uppercase">Image generator</a>
+      </div>
+      <div class="col text-center">
+        <ul class="navbar-nav justify-content-center mb-lg-0">
           <li class="nav-item">
             <a class="nav-link link-light"
               [routerLink]="['']"
@@ -23,8 +26,9 @@
             ><i class="bi bi-palette-fill me-1"></i>Create</a>
           </li>
         </ul>
-
-        <div ngbDropdown display="dynamic">
+      </div>
+      <div class="col-3 text-end">
+        <div ngbDropdown placement="bottom-right" display="dynamic">
           <div ngbDropdownToggle class="pointer">
             <span *ngIf="user">{{user.nickname}}</span>
             <i class="ms-1 bi bi-person-fill"></i>
@@ -53,5 +57,6 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
 </nav>

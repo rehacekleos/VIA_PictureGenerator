@@ -24,8 +24,8 @@ export class UsersDa extends BaseDataAccess implements DataAccessInterface{
         return user as User
     }
 
-    async getUserById(userId: string){
-        return await this.db.collection(this.collection).findOne({userId: userId});
+    async getUserById(userId: string): Promise<User>{
+        return await this.db.collection(this.collection).findOne({userId: userId}) as any as User;
     }
 
     async createUser(user: User): Promise<User>{
@@ -37,7 +37,11 @@ export class UsersDa extends BaseDataAccess implements DataAccessInterface{
     }
 
     async updateUser(userId: string, user: User){
-        return await this.db.collection(this.collection).updateOne({userId: userId}, user);
+        try {
+            return await this.db.collection(this.collection).updateOne({userId: userId}, {$set: user});
+        } catch (e) {
+            console.log(e)
+        }
     }
 
 }

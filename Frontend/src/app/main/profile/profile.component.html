@@ -5,11 +5,9 @@
         <form ngForm #editForm="ngForm" (ngSubmit)="confirmEdit()" class="row g-0" >
           <div class="col-md-4 gradient-custom text-center px-2"
                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-            <div (click)="setPicture()" [class.pointer]="edit">
+            <div>
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                   [class.edit-profile-image]="edit"
                    alt="Avatar" class="img-fluid my-4" style="width: 80px;">
-              <i *ngIf="edit" class="bi bi-pencil-square edit-profile-image-icon"></i>
             </div>
             <div>
               <h5 *ngIf="!edit">{{user.nickname}}</h5>
@@ -23,7 +21,7 @@
                        #nickname="ngModel"
                        [class.is-invalid]="nickname.invalid  && (nickname.dirty || nickname.touched)"
                        [class.is-valid]="nickname.valid && (nickname.dirty || nickname.touched)"
-                       [(ngModel)]="user.nickname"
+                       [(ngModel)]="updatedUser.nickname"
                        id="nickname">
               </div>
             </div>
@@ -37,7 +35,7 @@
                        #password="ngModel"
                        [class.is-invalid]="password.invalid && (password.dirty || password.touched)"
                        [class.is-valid]="password.valid && (password.dirty || password.touched)"
-                       [(ngModel)]="user.password"
+                       [(ngModel)]="updatedUser.password"
                        id="password">
                 <div *ngIf="password.errors && (password.dirty || password.touched)" class="invalid-feedback">
                   <div *ngIf="password.errors['minlength']">
@@ -83,14 +81,15 @@
               <h6>Statistics</h6>
               <hr class="mt-0 mb-4">
               <div class="row pt-1">
-                <div class="col-6 mb-3">
-                  <h6>Images</h6>
-                  <p class="text-muted">Lorem ipsum</p>
+                <h6>Images</h6>
+                <ng-container *ngIf="imagesCount else LoadingCount">
+                <div class="col">
+                  <ngb-progressbar [value]="imagesCount*10">{{imagesCount}} of 10</ngb-progressbar>
                 </div>
-                <div class="col-6 mb-3">
-                  <h6>Rating</h6>
-                  <p class="text-muted">Dolor sit amet</p>
-                </div>
+                </ng-container>
+                <ng-template #LoadingCount>
+                  <p class="text-muted">Loading...</p>
+                </ng-template>
               </div>
             </div>
           </div>

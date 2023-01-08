@@ -13,6 +13,8 @@ import {DallEService} from '../../dataAccess/dallE/dallE.service';
 import {ImageService} from '../../image/services/image.service';
 import {ImageController} from '../../image/controllers/image.controller';
 import {ImageDa} from '../../image/dataAccess/image.da';
+import {UserService} from '../../users/services/user.service';
+import {UserController} from '../../users/controllers/user.controller';
 
 export class ServerBaseBootstrap {
 
@@ -43,12 +45,14 @@ export class ServerBaseBootstrap {
         const userDA = UsersDa.getInstance();
         const imageDA = ImageDa.getInstance();
         const dallE = new DallEService();
-        const imageService = new ImageService(dallE, imageDA);
-        const authService = new AuthService(userDA);
+        const userService = new UserService(userDA);
+        const imageService = new ImageService(dallE, userService, imageDA);
+        const authService = new AuthService(userService);
 
         this.server = new Server(Number.parseInt(port.toString()), [
                 new DefaultController(),
                 new AuthController(authService),
+                new UserController(userService),
                 new ImageController(imageService)
             ]
         );

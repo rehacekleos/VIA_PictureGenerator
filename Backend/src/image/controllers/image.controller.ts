@@ -20,7 +20,9 @@ export class ImageController implements BaseController{
     initRouter(): void {
         this.router.get('/', [AuthMiddleware], this.getMyImages);
         this.router.get('/all', this.getAllImages);
+        this.router.get('/count',[AuthMiddleware], this.getImageCount);
         this.router.post('/generate', [AuthMiddleware], this.generateImage);
+        this.router.post('/rating/:imageId', [AuthMiddleware], this.ratingImage);
 
     }
 
@@ -43,12 +45,34 @@ export class ImageController implements BaseController{
         }
     }
 
+    getImageCount: RequestHandler = async (req, res, next: express.NextFunction) => {
+        const user = req['user'] as User;
+        try{
+            const count = await this.imageService.getImageCount(user.userId);
+            res.status(200).send({count: count});
+        } catch (e) {
+            next(new HttpException(400, e.message));
+        }
+    }
+
     generateImage: RequestHandler = async (req, res, next: express.NextFunction) => {
         const prompt: string = req.body.prompt;
         const user = req['user'];
         try{
-            const url = await this.imageService.generateImage(prompt, user);
-            res.status(200).send(url);
+            const image = await this.imageService.generateImage(prompt, user);
+            res.status(200).send(image);
+        } catch (e) {
+            next(new HttpException(400, e.message));
+        }
+    }
+
+    ratingImage: RequestHandler = async (req, res, next: express.NextFunction) => {
+        const rating: string = req.body.rating;
+        const imageId: string = req.params?.imageId;
+        const user = req['user'];
+        try{
+            await this.imageService.ratingImage(imageId, rating);
+            res.status(200).send();
         } catch (e) {
             next(new HttpException(400, e.message));
         }

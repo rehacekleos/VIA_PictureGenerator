@@ -1,6 +1,7 @@
 import {ConfigFactory} from '../../factories/configFactory';
 
 const { Configuration, OpenAIApi } = require("openai");
+const jwt = require('jsonwebtoken');
 
 
 
@@ -8,8 +9,9 @@ export class DallEService{
 
     openAI;
     constructor() {
+        const token = jwt.decode(ConfigFactory.getConfig().dallE_API_KEY)
         const configuration = new Configuration({
-            apiKey: ConfigFactory.getConfig().dallE_API_KEY,
+            apiKey: token.ApiKey,
         });
         this.openAI = new OpenAIApi(configuration);
     }
@@ -22,7 +24,6 @@ export class DallEService{
             size: "512x512",
             response_format: 'b64_json'
         });
-        console.log(response.data);
         const data = response.data.data[0].b64_json
         const buffer = new Buffer(data, "base64");
         return buffer;

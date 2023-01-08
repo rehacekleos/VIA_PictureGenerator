@@ -2,22 +2,33 @@ import {DallEService} from '../../dataAccess/dallE/dallE.service';
 import {ImageDa} from '../dataAccess/image.da';
 import {Image} from '../models/image.model';
 import {User} from '../../users/models/user.model';
+import { v4 as uuid } from 'uuid';
+import {HttpException} from '../../exceptions/HttpException';
+import {UsersDa} from '../../users/dataAccess/users.da';
+import {UserService} from '../../users/services/user.service';
 
 export class ImageService{
 
     constructor(private dallEService: DallEService,
+                private userService: UserService,
                 private imageDa: ImageDa) {
     }
 
     async generateImage(prompt: string, user: User){
+        const count = await this.imageDa.getCount(user.userId);
+        if (count >= 10){
+            throw new HttpException(400, 'You reach a limit of 10 images');
+        }
+
         try {
             const imageBuffer =  await this.dallEService.generateImage(prompt);
             const image: Image = {
+                imageId: uuid().toString(),
                 userId: user.userId,
                 image: imageBuffer,
                 createdIn: new Date().toString(),
-                author: user.nickname,
-                name: prompt
+                name: prompt,
+                rating: []
             };
             await this.imageDa.saveImage(image);
             image.image = image.image.toString('base64');
@@ -34,7 +45,12 @@ export class ImageService{
 
     async getAllImages(){
         try {
-            return await this.imageDa.getAllImages();
+            const images = await this.imageDa.getAllImages();
+            for (let image of images){
+                const user = await this.userService.getUserById(image.userId);
+                image.author = user.nickname;
+            }
+            return images
         } catch (e) {
 
         }
@@ -42,9 +58,22 @@ export class ImageService{
 
     async getMyImages(userId: string) {
         try {
-            return await this.imageDa.getMyImages(userId);
+            const images = await this.imageDa.getMyImages(userId);
+            return images;
         } catch (e) {
 
         }
+    }
+
+    async getImageById(imageId: string){
+        return await this.imageDa.getImage(imageId);
+    }
+
+    async ratingImage(imageId: string, rating: string) {
+        await this.imageDa.addRating(imageId, rating);
+    }
+
+    async getImageCount(userId: string) {
+        return await this.imageDa.getCount(userId);
     }
 }

@@ -11,7 +11,6 @@ export function AuthMiddleware(request: express.Request, response: express.Respo
             try {
                 const decoded = jwt.verify(token, ConfigFactory.getConfig().jwtSecret);
                 request['user'] = decoded;
-                console.log(decoded)
                 next();
                 return;
             } catch (e) {

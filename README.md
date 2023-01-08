@@ -47,3 +47,11 @@ Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 - Zabezpečení endpointů pomocí jwt
 
 Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximální počet obrázků. při velkém množství přestane aplikace generovat nové obrázky.
+
+## 8.1.2022
+- Dokončení profilu
+  - změna nickname a hesla
+- Přidání limitu na maximální počet obrázků
+- Dodělání úvodní stránky
+- Úprava generování fotek
+- Přídání hodnocení fotek

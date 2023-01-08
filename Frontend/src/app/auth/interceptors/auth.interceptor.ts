@@ -7,11 +7,13 @@ import {
 } from '@angular/common/http';
 import {catchError, Observable, retry, throwError} from 'rxjs';
 import {AuthService} from '../services/auth.service';
+import {CustomToasterService} from '../../utils/custom-toaster.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private toaster: CustomToasterService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const userToken = this.authService.getToken();
@@ -22,6 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
       retry(0),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
+          this.toaster.showToastMessage('You have been inactive for a long time, please login again.', 5000, 'danger');
           this.authService.logOut()
           return throwError(error);
         }

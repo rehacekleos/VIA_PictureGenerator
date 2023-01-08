@@ -5,3 +5,8 @@ export class User{
     password: string;
     picture?: any;
 }
+
+export class UpdateUser{
+    nickname: string;
+    password: string;
+}
