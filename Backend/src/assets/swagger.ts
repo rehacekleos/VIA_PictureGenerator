@@ -9,7 +9,7 @@ export const Swagger = {
     },
     "servers": [
         {
-            "url": "http://localhost:8080"
+            "url": "https://via-image-generator.onrender.com"
         }
     ],
     "paths": {

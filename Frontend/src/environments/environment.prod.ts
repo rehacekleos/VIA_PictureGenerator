@@ -1,4 +1,4 @@
-const serverURL = 'http://localhost:8080';
+const serverURL = 'https://via-image-generator.onrender.com';
 export const environment = {
   production: true,
 
