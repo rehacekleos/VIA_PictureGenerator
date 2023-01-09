@@ -10,6 +10,7 @@ $blue: #0065BD;
 @import 'src/assets/toastr-bs5-alert.scss';
 @import 'ngx-lightbox/lightbox.css';
 @import "placeholder-loading/src/scss/placeholder-loading";
+@import "ngx-spinner/animations/ball-spin-clockwise.css";
 
 html, body{
   margin: 0;
@@ -30,4 +31,8 @@ html, body{
 
 .pointer{
   cursor: pointer !important;
+}
+
+.ngx-spinner-overlay{
+  z-index: 0 !important;
 }

@@ -10,10 +10,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthModule} from '../auth/auth.module';
 import {FormsModule} from '@angular/forms';
 import { GalleryComponent } from './gallery/gallery.component';
-import {LightboxModule} from 'ng-gallery/lightbox';
 import { GenerateImageComponent } from './generate-image/generate-image.component';
-
-
+import {LightboxModule} from 'ngx-lightbox';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,8 @@ import { GenerateImageComponent } from './generate-image/generate-image.componen
     NgbModule,
     AuthModule,
     FormsModule,
-    LightboxModule
+    LightboxModule,
+    NgxSpinnerModule,
   ]
 })
 export class MainModule { }

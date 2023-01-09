@@ -9,6 +9,8 @@ import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LightboxModule} from 'ngx-lightbox';
 import {AuthInterceptor} from './auth/interceptors/auth.interceptor';
+import {NgxSpinnerModule} from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,7 @@ import {AuthInterceptor} from './auth/interceptors/auth.interceptor';
     NgbModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    NgxSpinnerModule,
     LightboxModule
   ],
   providers: [

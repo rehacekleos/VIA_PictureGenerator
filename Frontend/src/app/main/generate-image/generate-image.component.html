@@ -1,13 +1,26 @@
-<div class="container mt-5 text-center">
-  <h1 class="pt-2">Generate new image</h1>
-  <form>
-    Prompt:
-    <input name="prompt" type="text" [(ngModel)]="prompt">
-    <button (click)="generate()">Create</button>
-  </form>
+<div class="container mt-5 pb-5 text-center">
+  <h1 class="pt-2">Generate image</h1>
+  <form class="text-start mb-2">
+    <label class="form-label" for="name">Image name</label>
+    <input class="form-control w-auto mb-2" type="text" id="name" name="name" [(ngModel)]="generateImage.name">
 
-  <div *ngIf="image">
-  <h2>Result</h2>
-    <img [src]="image.image">
+    <label class="form-label" for="prompt">Prompt</label>
+    <textarea class="form-control"
+              id="prompt"
+              name="prompt"
+              [(ngModel)]="generateImage.prompt"></textarea>
+
+  </form>
+  <button class="btn btn-primary" [disabled]="generateImage.name === '' || generateImage.prompt == ''" (click)="generate()">Generate Image</button>
+  <hr>
+  <div class="image w-100 position-relative mt-3">
+    <div *ngIf="image">
+      <img [src]="image.image">
+    </div>
+    <ngx-spinner size="default"
+                 type="ball-spin-clockwise"
+                 [fullScreen]="false">
+      <p class="text-white pt-4" > Generating image... </p>
+    </ngx-spinner>
   </div>
 </div>

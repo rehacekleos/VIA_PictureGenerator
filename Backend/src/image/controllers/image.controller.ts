@@ -7,6 +7,7 @@ import {RequestHandler} from 'express';
 import {ImageService} from '../services/image.service';
 import {AuthMiddleware} from '../../middlewares/authMiddleware';
 import {User} from '../../users/models/user.model';
+import {GenerateImage} from '../models/image.model';
 
 
 export class ImageController implements BaseController{
@@ -57,10 +58,10 @@ export class ImageController implements BaseController{
     }
 
     generateImage: RequestHandler = async (req, res, next: express.NextFunction) => {
-        const prompt: string = req.body.prompt;
+        const generateImage: GenerateImage = req.body;
         const user = req['user'];
         try{
-            const image = await this.imageService.generateImage(prompt, user);
+            const image = await this.imageService.generateImage(generateImage, user);
             res.status(200).send(image);
         } catch (e) {
             next(new HttpException(400, e.message));

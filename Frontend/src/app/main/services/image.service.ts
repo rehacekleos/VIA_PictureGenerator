@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {firstValueFrom} from 'rxjs';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GenerateImage} from '../models/image.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +39,9 @@ export class ImageService {
     return images;
   }
 
-  async generateImage(prompt: string) {
+  async generateImage(generateImage: GenerateImage) {
     const url = environment.imageApi + '/generate'
-    const image = await firstValueFrom(this.http.post<any>(url, {prompt: prompt}));
+    const image = await firstValueFrom(this.http.post<any>(url, generateImage));
     image.image = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + image.image);
     return image;
   }

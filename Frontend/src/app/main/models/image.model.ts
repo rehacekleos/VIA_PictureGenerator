@@ -8,3 +8,8 @@ export interface Image{
   rating: number[];
   currentRate?: number;
 }
+
+export interface GenerateImage{
+  name: string;
+  prompt: string;
+}

@@ -1,6 +1,6 @@
 import {DallEService} from '../../dataAccess/dallE/dallE.service';
 import {ImageDa} from '../dataAccess/image.da';
-import {Image} from '../models/image.model';
+import {GenerateImage, Image} from '../models/image.model';
 import {User} from '../../users/models/user.model';
 import { v4 as uuid } from 'uuid';
 import {HttpException} from '../../exceptions/HttpException';
@@ -14,20 +14,20 @@ export class ImageService{
                 private imageDa: ImageDa) {
     }
 
-    async generateImage(prompt: string, user: User){
+    async generateImage(generate: GenerateImage, user: User){
         const count = await this.imageDa.getCount(user.userId);
         if (count >= 10){
             throw new HttpException(400, 'You reach a limit of 10 images');
         }
 
         try {
-            const imageBuffer =  await this.dallEService.generateImage(prompt);
+            const imageBuffer =  await this.dallEService.generateImage(generate.prompt);
             const image: Image = {
                 imageId: uuid().toString(),
                 userId: user.userId,
                 image: imageBuffer,
                 createdIn: new Date().toString(),
-                name: prompt,
+                name: generate.name,
                 rating: []
             };
             await this.imageDa.saveImage(image);

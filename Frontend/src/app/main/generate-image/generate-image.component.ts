@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ImageService} from '../services/image.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {GenerateImage} from '../models/image.model';
 
 @Component({
   selector: 'app-generate-image',
@@ -8,14 +10,30 @@ import {ImageService} from '../services/image.service';
 })
 export class GenerateImageComponent implements OnInit {
 
-  prompt: string
+  generateImage: GenerateImage = {
+    name: '',
+    prompt: ''
+  }
   image: any
-  constructor(private imageService: ImageService) { }
+
+  generating = true;
+  constructor(private imageService: ImageService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.generateImage = {
+      name: '',
+      prompt: ''
+    }
   }
 
   async generate() {
-    this.image = await this.imageService.generateImage(this.prompt)
+    await this.spinner.show()
+    try {
+      this.image = await this.imageService.generateImage(this.generateImage)
+    } catch (e) {
+      await this.spinner.hide()
+    }
+    await this.spinner.hide()
   }
 }

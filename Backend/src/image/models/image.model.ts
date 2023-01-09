@@ -7,3 +7,8 @@ export interface Image{
     createdIn: string;
     rating: number[];
 }
+
+export interface GenerateImage{
+    name: string;
+    prompt: string;
+}
