@@ -36,4 +36,9 @@ export class GenerateImageComponent implements OnInit {
     }
     await this.spinner.hide()
   }
+
+  async generateName() {
+    const name = await this.imageService.generateName();
+    this.generateImage.name = name;
+  }
 }

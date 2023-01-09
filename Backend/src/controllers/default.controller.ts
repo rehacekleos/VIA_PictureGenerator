@@ -6,6 +6,7 @@ import {MongoDB} from "../dataAccess/DBConnection/MongoDB";
 import swaggerUi from 'swagger-ui-express';
 import {Swagger} from '../assets/swagger';
 
+
 export class DefaultController implements BaseController {
 
     public router = express.Router();

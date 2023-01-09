@@ -65,3 +65,4 @@ Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximál
 
 ## 9.1.2022
 - Nasazení projektu na hosting
+- Přidání dalšího API na generování random jména obrázku

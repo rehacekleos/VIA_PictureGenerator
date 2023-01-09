@@ -6,10 +6,12 @@ import { v4 as uuid } from 'uuid';
 import {HttpException} from '../../exceptions/HttpException';
 import {UsersDa} from '../../users/dataAccess/users.da';
 import {UserService} from '../../users/services/user.service';
+import {WordGeneratorService} from '../../dataAccess/wordGenerator/wordGenerator.service';
 
 export class ImageService{
 
     constructor(private dallEService: DallEService,
+                private wordGeneratorService: WordGeneratorService,
                 private userService: UserService,
                 private imageDa: ImageDa) {
     }
@@ -83,5 +85,11 @@ export class ImageService{
             throw new Error('You can not delete this image');
         }
         await this.imageDa.deleteImage(imageId);
+    }
+
+    async getRandomName() {
+        const words = await this.wordGeneratorService.generateWords();
+        const name = words.join(' ');
+        return name;
     }
 }

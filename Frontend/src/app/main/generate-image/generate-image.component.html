@@ -3,7 +3,7 @@
   <form class="text-start mb-2">
     <label class="form-label" for="name">Image name</label>
     <input class="form-control w-auto mb-2" type="text" id="name" name="name" [(ngModel)]="generateImage.name">
-
+    <button class="btn btn-secondary" (click)="generateName()" >Generate random name</button>
     <label class="form-label" for="prompt">Prompt</label>
     <textarea class="form-control"
               id="prompt"

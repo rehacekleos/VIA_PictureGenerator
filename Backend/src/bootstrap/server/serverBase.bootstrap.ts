@@ -15,6 +15,7 @@ import {ImageController} from '../../image/controllers/image.controller';
 import {ImageDa} from '../../image/dataAccess/image.da';
 import {UserService} from '../../users/services/user.service';
 import {UserController} from '../../users/controllers/user.controller';
+import {WordGeneratorService} from '../../dataAccess/wordGenerator/wordGenerator.service';
 
 export class ServerBaseBootstrap {
 
@@ -45,8 +46,9 @@ export class ServerBaseBootstrap {
         const userDA = UsersDa.getInstance();
         const imageDA = ImageDa.getInstance();
         const dallE = new DallEService();
+        const wordGenerator = new WordGeneratorService();
         const userService = new UserService(userDA);
-        const imageService = new ImageService(dallE, userService, imageDA);
+        const imageService = new ImageService(dallE, wordGenerator, userService, imageDA);
         const authService = new AuthService(userService);
 
         this.server = new Server(Number.parseInt(port.toString()), [

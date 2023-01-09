@@ -61,4 +61,10 @@ export class ImageService {
     const url = environment.imageApi + `/${imageId}`
     await firstValueFrom(this.http.delete(url))
   }
+
+  async generateName() {
+    const url = environment.imageApi + '/randomName'
+    const response = await firstValueFrom(this.http.get<{name: string}>(url));
+    return response.name;
+  }
 }

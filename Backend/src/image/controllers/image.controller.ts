@@ -22,6 +22,7 @@ export class ImageController implements BaseController{
         this.router.get('/', [AuthMiddleware], this.getMyImages);
         this.router.get('/all', this.getAllImages);
         this.router.get('/count',[AuthMiddleware], this.getImageCount);
+        this.router.get('/randomName',[AuthMiddleware], this.getRandomName);
         this.router.post('/generate', [AuthMiddleware], this.generateImage);
         this.router.post('/rating/:imageId', [AuthMiddleware], this.ratingImage);
         this.router.delete('/:imageId', [AuthMiddleware], this.deleteImage);
@@ -52,6 +53,16 @@ export class ImageController implements BaseController{
         try{
             const count = await this.imageService.getImageCount(user.userId);
             res.status(200).send({count: count});
+        } catch (e) {
+            next(new HttpException(400, e.message));
+        }
+    }
+
+    getRandomName: RequestHandler = async (req, res, next: express.NextFunction) => {
+        const user = req['user'] as User;
+        try{
+            const name = await this.imageService.getRandomName();
+            res.status(200).send({name: name});
         } catch (e) {
             next(new HttpException(400, e.message));
         }
