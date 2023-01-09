@@ -2,6 +2,9 @@
 
 Toto je projekt pro předmět VIA na FEL ČVUT.
 
+## Url
+https://via-image-generator.onrender.com
+
 ## Cíl projektu
 Cílem projektu je vytvořit aplikaci, kde bude moc uživatel zadat základní údaje a aplikace mu vygeneruje obrázek podle údajů.
 
@@ -59,3 +62,6 @@ Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximál
 - Obnovení jwt tokenu při každém zabezpečeném volání
 - Odhlášení uživatel po 10 minutách neaktivity
 - Přidání Swaggeru
+
+## 9.1.2022
+- Nasazení projektu na hosting
