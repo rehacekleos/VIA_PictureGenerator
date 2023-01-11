@@ -1,8 +1,10 @@
 {
   "name": "VIA-image-generator",
   "scripts": {
-    "build-fe": "cd Frontend && npm run build ",
+    "build-fe-docker": "cd Frontend && npm run build-docker",
+    "build-fe": "cd Frontend && npm run build",
     "build": "npm install && cd Backend && tsc && cd ..",
+    "build-docker": "npm run build-fe-docker && npm run build && docker build -t via/image_generator .",
     "start": "node build/index.js"
   },
   "dependencies": {

@@ -42,7 +42,7 @@ Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 - Zabezpečení aplikace
   - Jiné rozhraní pro přihlášeného a odhlášeného uživatele
 
-## 5.1.2022
+## 5.1.2023
 - Napojení na Dall-E 2
 - Vytvoření obrazovky galerie
 - Vytvoření obrazovky moje obrázky
@@ -51,7 +51,7 @@ Jako databáze je použita MongoDB. Databáze je hostovaná na MongoDB Atlas.
 
 Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximální počet obrázků. při velkém množství přestane aplikace generovat nové obrázky.
 
-## 8.1.2022
+## 8.1.2023
 - Dokončení profilu
   - Změna nickname a hesla
 - Přidání limitu na maximální počet obrázků
@@ -63,6 +63,12 @@ Bohužel již nyní je Dall-E zpoplatněný. Je tam nastavený limit na maximál
 - Odhlášení uživatel po 10 minutách neaktivity
 - Přidání Swaggeru
 
-## 9.1.2022
+## 9.1.2023
 - Nasazení projektu na hosting
 - Přidání dalšího API na generování random jména obrázku
+
+## 11.1.2023
+- Opravení bugů
+- Přidání Dockerfile pro build dockeru
+- Přidání ENV variable pro definici API_URL
+- Finální nasazení

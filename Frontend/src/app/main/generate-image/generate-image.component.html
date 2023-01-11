@@ -1,12 +1,16 @@
 <div class="container mt-5 pb-5 text-center">
   <h1 class="pt-2">Generate image</h1>
   <form class="text-start mb-2">
+
     <label class="form-label" for="name">Image name</label>
-    <input class="form-control w-auto mb-2" type="text" id="name" name="name" [(ngModel)]="generateImage.name">
-    <button class="btn btn-secondary" (click)="generateName()" >Generate random name</button>
+    <div class="input-group mb-2">
+      <input placeholder="Image name" class="form-control" type="text" id="name" name="name" [(ngModel)]="generateImage.name">
+      <button class="btn btn-secondary" (click)="generateName()" >Generate random name</button>
+    </div>
     <label class="form-label" for="prompt">Prompt</label>
     <textarea class="form-control"
               id="prompt"
+              placeholder="Description of image what you want generate."
               name="prompt"
               [(ngModel)]="generateImage.prompt"></textarea>
 
